@@ -7,18 +7,10 @@ import java.util.Random;
  */
 public class Genereerimine {
     static int empty[][]=new int[9][9];
-    static int filled[][]=new int[9][9];
-    static int forUser [][]=new int [][]
-                   {{1,0,0,1,0,1,1,1,0},
-                    {1,1,0,1,0,0,1,0,1},
-                    {1,1,1,0,1,0,1,0,1},
-                    {1,0,1,0,0,1,1,1,0},
-                    {1,0,1,1,0,1,1,0,0},
-                    {1,0,0,0,1,1,1,1,0},
-                    {1,0,1,0,1,1,1,0,0},
-                    {0,0,1,1,0,0,1,1,1},
-                    {1,1,0,0,1,0,1,0,1}} ;
-    public static void main(String[] args) {
+    static int show[][]=new int [9][9];
+    static  int solved[][]=new int[9][9];
+
+    static int[][] toSolve(int[][] forUser) {
         int[] firstRow = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
         shuffleArray(firstRow);
         for (int i = 0; i <9 ; i++) {
@@ -27,22 +19,27 @@ public class Genereerimine {
                 empty[j][i]=0;
             }
         }
+      //  print(empty);
+        int filled[][]=new int[9][9];
         shuffleforUser(forUser);
         for (int i = 0; i <9 ; i++) {
             for (int j = 0; j < 9; j++) {
                 if (forUser[i][j] == 1) {
-                    forUser[i][j] = 0;
+                    show[i][j] = 0;
                 } else {
-                    forUser[i][j] = sudoku(0, 0, filled)[i][j];
+                    show[i][j] = sudoku(0,0,filled)[i][j];
 
                 }
 
             }
         }
-
-        print(forUser);
+        //print (show);
+       // print (filled);
+        //print(empty);
+        return show;
 
     }
+
     static void shuffleArray(int[] ar)
     {
         Random rnd = new Random();
@@ -82,7 +79,9 @@ public class Genereerimine {
         return count==3;
     }
     public static int[][] sudoku(int y, int x, int[][]filled) {
-            while (!kontroll(8, 8, filled) || filled[8][8] == 0) {
+            while (!kontroll(8, 8, filled) || filled[8][8] == 0)
+
+            {
                 if(empty[y][x]!=0){
                     filled[y][x]=empty[y][x];
                     int yy, xx;
@@ -103,10 +102,13 @@ public class Genereerimine {
 
             }
             }
-            return filled;
+        System.arraycopy(filled,0,solved,0,9);
+
+            return solved;
+
 
         }
-    public static void print(int[][] grid) {
+    public static void print(String[][] grid) {
         System.out.println();
         for (int i=0;i<9;i++) {
             for (int j=0;j<9;j++) {
