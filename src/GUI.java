@@ -28,33 +28,7 @@ import java.util.Iterator;
 /**
  * Created by agrigorj on 12/12/15.
  */
-public class GUI extends Application {
-    static int forUser [][]=new int [][]
-            {{1,0,0,1,0,1,1,1,0},
-                    {1,1,0,1,0,0,1,0,1},
-                    {1,1,1,0,1,0,1,0,1},
-                    {1,0,1,0,0,1,1,1,0},
-                    {1,0,1,1,0,1,1,0,0},
-                    {1,0,0,0,1,1,1,1,0},
-                    {1,0,1,0,1,1,1,0,0},
-                    {0,0,1,1,0,0,1,1,1},
-                    {1,1,0,0,1,0,1,0,1}} ;
-    static Genereerimine class1=new Genereerimine();
-    static Kontrolli class2=new Kontrolli();
-    static Stage lava;
-    static StackPane maailm;
-    static GridPane laud;
-    int lauaPikkus = 9;
-    int ruuduServaPikkus = 50;
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        lava = primaryStage;
-        lava.setResizable(false);
-        lava.setTitle("Sudoku v 0.6 by Andrei Grigorjev");
-        seadistaLava();
-        genereeriGrid(class1.toSolve(forUser));
-    }
+public class GUI extends Main {
     public void genereeriGrid(int[][] ar) {
         for (int i = 0; i < lauaPikkus; i++) {
             for (int j = 0; j < lauaPikkus; j++) {
@@ -108,51 +82,156 @@ public class GUI extends Application {
 
     }
 
-    private void seadistaLava() {
+    public void seadistaMang() {
         maailm = new StackPane();
         laud = new GridPane();
         laud.setPadding(new Insets(10,0,10,20));
         Line abi1=new Line (150,0,150,455);
         abi1.setTranslateX(-77.0);
         abi1.setTranslateY(-60.0);
-        abi1.setStroke(Color.ORANGE);
+        abi1.setStroke(Color.BLACK);
         abi1.setStrokeWidth(2);
         Line abi2=new Line (150,0,150,455);
         abi2.setTranslateX(76.5);
         abi2.setTranslateY(-60.0);
-        abi2.setStroke(Color.ORANGE);
+        abi2.setStroke(Color.BLACK);
         abi2.setStrokeWidth(2);
         Line abi3=new Line (0,0,455,0);
         abi3.setTranslateY(-136.0);
-        abi3.setStroke(Color.ORANGE);
+        abi3.setStroke(Color.BLACK);
         abi3.setStrokeWidth(2);
         Line abi4=new Line (0,0,455,0);
         abi4.setTranslateY(17.0);
-        abi4.setStroke(Color.ORANGE);
+        abi4.setStroke(Color.BLACK);
         abi4.setStrokeWidth(2);
-        Button gen = new Button("Genereeri uus");
-        gen.setPrefSize(120.0,20.0);
-        gen.setTranslateY(220);
-        gen.setTranslateX(-170.0);
-        gen.setOnAction(new EventHandler<ActionEvent>() {
+        Button back = new Button("Main screen");
+        back.setStyle("-fx-font-size: 12px;"
+                + "-fx-font-style: italic;"
+                + "-fx-alignment: center;"
+                + "-fx-font-weight: bold;"
+                + "-fx-font-family: Arial Black;"
+                + "-fx-background-color: #FBCEB1; "
+                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );"
+                + "fx-border-color: black;"
+                + "fx-border-radius: 5;"
+                + "-fx-text-fill: black;");
+        back.setPrefSize(120.0, 20.0);
+        back.setTranslateY(220);
+        back.setTranslateX(-170.0);
+        back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                seadistaLava();
-                genereeriGrid(class1.toSolve(forUser));
+                final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setResizable(false);
+                dialog.initOwner(lava);
+                VBox dialogVbox = new VBox(20);
+                Button yes = new Button("Yes");
+                yes.setPrefSize(60, 30);
+                yes.setTranslateY(-2);
+                yes.setTranslateX(-50);
+                yes.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        peaekraan();
+                        logo();
+                        dialog.close();
+                    }
+                });
+                Button no = new Button("NO");
+                no.setTranslateY(-45);
+                no.setTranslateX(50);
+                no.setPrefSize(60, 30);
+                no.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog.close();
+                    }
+                });
+                dialogVbox.getChildren().add(new Text("Are you sure you want exit the game?"));
+                dialogVbox.getChildren().addAll(yes,no);
+                dialogVbox.setStyle("-fx-font-size: 12px;"
+                        + "-fx-font-style: italic;"
+                        + "-fx-alignment: center;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-font-family: Arial Black;"
+                        + "-fx-text-fill: black;");
+                Scene dialogScene = new Scene(dialogVbox, 300, 100);
+                dialog.setScene(dialogScene);
+                dialog.show();
+
             }
         });
-        Button lah = new Button("Näita lahendus");
+        Button lah = new Button("Show solution");
+        lah.setStyle("-fx-font-size: 12px;"
+                + "-fx-font-style: italic;"
+                + "-fx-alignment: center;"
+                + "-fx-font-weight: bold;"
+                + "-fx-font-family: Arial Black;"
+                + "-fx-background-color: #FBCEB1; "
+                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );"
+                + "fx-border-color: black;"
+                + "fx-border-radius: 5;"
+                + "-fx-text-fill: black;");
         lah.setPrefSize(120.0, 20.0);
         lah.setTranslateY(220);
         lah.setTranslateX(170);
         lah.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                seadistaLava();
-                genereeriGrid(class1.solved);
+                final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setResizable(false);
+                dialog.initOwner(lava);
+                VBox dialogVbox = new VBox(20);
+                Button yes = new Button("Yes");
+                yes.setPrefSize(60, 30);
+                yes.setTranslateY(-2);
+                yes.setTranslateX(-50);
+                yes.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        seadistaMang();
+                        genereeriGrid(class1.solved);
+                        dialog.close();
+                    }
+                });
+                Button no = new Button("NO");
+                no.setTranslateY(-45);
+                no.setTranslateX(50);
+                no.setPrefSize(60, 30);
+                no.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog.close();
+                    }
+                });
+                dialogVbox.getChildren().add(new Text("Are you giving up?"));
+                dialogVbox.getChildren().addAll(yes,no);
+                dialogVbox.setStyle("-fx-font-size: 12px;"
+                        + "-fx-font-style: italic;"
+                        + "-fx-alignment: center;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-font-family: Arial Black;"
+                        + "-fx-text-fill: black;");
+                Scene dialogScene = new Scene(dialogVbox, 300, 100);
+                dialog.setScene(dialogScene);
+                dialog.show();
+
             }
         });
-        Button kontr = new Button("Kontrolli!");
+
+        Button kontr = new Button("Check out");
+        kontr.setStyle("-fx-font-size: 12px;"
+                + "-fx-font-style: italic;"
+                + "-fx-alignment: center;"
+                + "-fx-font-weight: bold;"
+                + "-fx-font-family: Arial Black;"
+                + "-fx-background-color: #FBCEB1; "
+                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );"
+                + "fx-border-color: black;"
+                + "fx-border-radius: 5;"
+                + "-fx-text-fill: black;");
         kontr.setPrefSize(120.0, 20.0);
         kontr.setTranslateY(220);
         kontr.setTranslateX(0);
@@ -163,7 +242,7 @@ public class GUI extends Application {
 
             }
         });
-        maailm.getChildren().addAll(laud,gen,lah,kontr,abi1,abi2,abi3,abi4);
+        maailm.getChildren().addAll(laud,back,lah,kontr,abi1,abi2,abi3,abi4);
         Scene manguStseen = new Scene(maailm, 500,600);
         lava.setScene(manguStseen);
         lava.show(); // näita akent
