@@ -1,5 +1,8 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by agrigorj on 25/12/15.
  */
-public class Kontrolli extends  GUI {
+public class Kontrolli extends  Main {
     public void kontrolli() {
         ArrayList kasutajalt = new ArrayList();
         ArrayList programmilt =new ArrayList();
@@ -29,7 +32,7 @@ public class Kontrolli extends  GUI {
                 programmilt.add(Integer.toString(class1.solved[i][j]));
             }
         }
-        //  System.out.println(programmilt);
+          System.out.println(programmilt);
         for (int i = 0; i <81 ; i++) {
             // System.out.println(Integer.toString(i/9));
             // System.out.println(Integer.toString(i-(i/9*9)));
@@ -63,20 +66,54 @@ public class Kontrolli extends  GUI {
         if (kasutajalt.equals(programmilt)){
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.setResizable(false);
             dialog.initOwner(lava);
             VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text("TUBLI!!!!"));
-            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            Button ok=new Button("OK!");
+            ok.setPrefSize(60,30);
+            ok.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+
+                }
+            });
+            dialogVbox.getChildren().add(new Text("Alright! You've done it!" ));
+            dialogVbox.getChildren().addAll(ok);
+            dialogVbox.setStyle("-fx-font-size: 12px;"
+                    + "-fx-font-style: italic;"
+                    + "-fx-alignment: center;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-font-family: Arial Black;"
+                    + "-fx-text-fill: black;");
+            Scene dialogScene = new Scene(dialogVbox, 420, 150);
             dialog.setScene(dialogScene);
             dialog.show();
 
         }else{
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.setResizable(false);
             dialog.initOwner(lava);
             VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text("Kontrolli lahendus!"));
-            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            Button ok=new Button("OK!");
+            ok.setPrefSize(60,30);
+            ok.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+
+                }
+            });
+            dialogVbox.getChildren().add(new Text("Oops! Something went wrong. Please check your solution!"));
+            dialogVbox.getChildren().addAll(ok);
+            dialogVbox.setStyle("-fx-font-size: 12px;"
+                    + "-fx-font-style: italic;"
+                    + "-fx-alignment: center;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-font-family: Arial Black;"
+                    + "-fx-text-fill: black;");
+            Scene dialogScene = new Scene(dialogVbox, 420, 150);
             dialog.setScene(dialogScene);
             dialog.show();
         }
