@@ -5,12 +5,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -61,6 +60,7 @@ public class Main extends Application {
     static Genereerimine class1 = new Genereerimine();
     static Kontrolli class2 = new Kontrolli();
     static GUI class3 = new GUI();
+    static help class4=new help();
     static Stage lava;
     static StackPane maailm;
     static GridPane laud;
@@ -71,10 +71,16 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         lava = primaryStage;
         lava.setResizable(false);
-        lava.setTitle("Sudoku v 0.7 by Andrei Grigorjev");
+        lava.setTitle("Sudoku v 0.9 by Andrei Grigorjev");
         peaekraan();
         logo();
-        //class3.genereeriGrid(class1.toSolve(forUser1));
+        lava.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode().equals(KeyCode.F1)) {
+                System.out.println("F1 pressed");
+                class4.help();
+
+            }
+        });
     }
 
     public void peaekraan() {
@@ -83,7 +89,6 @@ public class Main extends Application {
         laud.setPadding(new Insets(10, 0, 10, 20));
         Button easy = new Button("EASY");
         easy.setStyle("-fx-font-size: 14px;"
-                + "-fx-font-style: italic;"
                 + "-fx-alignment: center;"
                 + "-fx-font-weight: bold;"
                 + "-fx-font-family: Arial Black;"
@@ -104,7 +109,6 @@ public class Main extends Application {
         });
         Button medium = new Button("MEDIUM");
         medium.setStyle("-fx-font-size: 14px;"
-                + "-fx-font-style: italic;"
                 + "-fx-alignment: center;"
                 + "-fx-font-weight: bold;"
                 + "-fx-font-family: Arial Black;"
@@ -126,7 +130,6 @@ public class Main extends Application {
         });
         Button hard = new Button("HARD");
         hard.setStyle("-fx-font-size: 14px;"
-                + "-fx-font-style: italic;"
                 + "-fx-alignment: center;"
                 + "-fx-font-weight: bold;"
                 + "-fx-font-family: Arial Black;"
@@ -176,7 +179,6 @@ public class Main extends Application {
         Label text = new Label(logo[i][j]);
         text.setTranslateX(20.0);
         text.setStyle("-fx-font-size: 20px;"
-                + "-fx-font-style: italic;"
                 + "-fx-alignment: center;"
                 + "-fx-font-weight: bold;"
                 + "-fx-font-family: Arial Black;"
