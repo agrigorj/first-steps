@@ -80,7 +80,7 @@ public class Kontrolli extends  Main {
 
                 }
             });
-            dialogVbox.getChildren().add(new Text("Alright! You've done it! "+'\n'+" Your time is " + class5.getTime()));
+            dialogVbox.getChildren().add(new Text("Alright! You've done it! "+'\n'+'\n'+" Your time is " + class5.getTime()));
             dialogVbox.getChildren().addAll(ok);
             dialogVbox.setStyle("-fx-font-size: 12px;"
                     + "-fx-font-style: italic;"
