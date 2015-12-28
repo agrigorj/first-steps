@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -60,6 +62,7 @@ public class Main extends Application {
     static Genereerimine class1 = new Genereerimine();
     static Kontrolli class2 = new Kontrolli();
     static GUI class3 = new GUI();
+    static ElapsedT class5=new ElapsedT();
     static help class4=new help();
     static Stage lava;
     static StackPane maailm;
@@ -71,7 +74,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         lava = primaryStage;
         lava.setResizable(false);
-        lava.setTitle("Sudoku v 0.9 by Andrei Grigorjev");
+        lava.setTitle("Sudoku v 1.0 by Andrei Grigorjev");
         peaekraan();
         logo();
         lava.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
@@ -87,6 +90,7 @@ public class Main extends Application {
         maailm = new StackPane();
         laud = new GridPane();
         laud.setPadding(new Insets(10, 0, 10, 20));
+
         Button easy = new Button("EASY");
         easy.setStyle("-fx-font-size: 14px;"
                 + "-fx-alignment: center;"
@@ -105,6 +109,8 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 class3.seadistaMang();
                 class3.genereeriGrid(class1.toSolve(forUser1));
+                class5.startCount();
+
             }
         });
         Button medium = new Button("MEDIUM");
@@ -126,6 +132,8 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 class3.seadistaMang();
                 class3.genereeriGrid(class1.toSolve(forUser2));
+                class5.startCount();
+
             }
         });
         Button hard = new Button("HARD");
@@ -146,6 +154,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 class3.seadistaMang();
                 class3.genereeriGrid(class1.toSolve(forUser3));
+                class5.startCount();
             }
         });
         Label explain =new Label("Please choose difficulty level to start or press  F1 for help");
