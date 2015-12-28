@@ -1,4 +1,10 @@
+import com.oracle.webservices.internal.api.message.PropertySet;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,16 +19,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.Properties;
 
 
 /**
@@ -136,6 +139,7 @@ public class GUI extends Main {
                         peaekraan();
                         logo();
                         dialog.close();
+                        class5.stopCount();
                     }
                 });
                 Button no = new Button("NO");
@@ -194,6 +198,7 @@ public class GUI extends Main {
                         seadistaMang();
                         genereeriGrid(class1.solved);
                         dialog.close();
+                        class5.stopCount();
                     }
                 });
                 Button no = new Button("NO");
@@ -242,7 +247,19 @@ public class GUI extends Main {
 
             }
         });
-        maailm.getChildren().addAll(laud,back,lah,kontr,abi1,abi2,abi3,abi4);
+        Label showtime =new Label();
+        showtime.setTranslateY(270);
+        showtime.setTranslateX(170);
+        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showtime.setText(class5.getTime());
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+        //showtime.setText("Time"+ class5.getTime());
+        maailm.getChildren().addAll(laud, back, lah, kontr, abi1, abi2, abi3, abi4, showtime);
         Scene manguStseen = new Scene(maailm, 500,600);
         lava.setScene(manguStseen);
         lava.show(); // näita akent
