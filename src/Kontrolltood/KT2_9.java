@@ -1,3 +1,5 @@
+package Kontrolltood;
+
 /** Koostada Java meetod, mis asendab parameetrina etteantud sõnes s kõik suurtähed märgiga '_'.
  Lahendus peab kasutama tsüklit.
 

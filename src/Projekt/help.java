@@ -1,3 +1,4 @@
+package Projekt;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -14,8 +15,8 @@ class help extends Main {
     public void help() {
         final Stage dialog = new Stage();
         dialog.setResizable(false);
-        dialog.setTitle("Sudoku game help");
-        dialog.initOwner(lava);
+        dialog.setTitle("Sudoku game Projekt.help");
+        dialog.initOwner(Main.lava);
         VBox root = new VBox();
         final WebView browser = new WebView();
         final WebEngine webEngine = browser.getEngine();

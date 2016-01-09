@@ -1,3 +1,5 @@
+package Projekt;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -23,7 +25,7 @@ class Kontrolli extends Main {
     static void kontrolli() {
         ArrayList kasutajalt = new ArrayList(); //siia kirjutame �les kasutaja maatriksi
         ArrayList programmilt = new ArrayList();//siia kopeerime programmi poolt lahendatud maatriksi
-        for (Node node : laud.getChildren()) { //skaneerime k�ik laua lahtrid
+        for (Node node : Main.laud.getChildren()) { //skaneerime k�ik laua lahtrid
             if (node instanceof TextField) {
                 kasutajalt.add(((TextField) node).getText().trim());
             } else if (node instanceof Label) {
@@ -33,19 +35,19 @@ class Kontrolli extends Main {
         System.out.println(kasutajalt); //vihjed konsooli
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                programmilt.add(Integer.toString(newField.solved[i][j]));
+                programmilt.add(Integer.toString(Main.newField.solved[i][j]));
             }
         }
         System.out.println(programmilt);//vihjed konsooli
         for (int i = 0; i < 81; i++) {
             if (programmilt.get(i).equals(kasutajalt.get(i))) {
-                laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
+                Main.laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
                         + "-fx-alignment: center;"
                         + "-fx-font-weight: bold;"
                         + "-fx-font-family: Arial Black;"
                         + "-fx-text-fill: GREEN;");
             } else if (kasutajalt.get(i).equals("")) {
-                laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
+                Main.laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
                         + "-fx-font-style: italic;"
                         + "-fx-alignment: center;"
                         + "-fx-font-weight: bold;"
@@ -55,7 +57,7 @@ class Kontrolli extends Main {
                         + "-fx-border-color:grey;");
 
             } else {
-                laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
+                Main.laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
                         + "-fx-font-style: italic;"
                         + "-fx-alignment: center;"
                         + "-fx-font-weight: bold;"
@@ -66,11 +68,11 @@ class Kontrolli extends Main {
             }
         }
         if (kasutajalt.equals(programmilt)) {
-            time.stopCount();
+            Main.time.stopCount();
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
-            dialog.initOwner(lava);
+            dialog.initOwner(Main.lava);
             VBox dialogVbox = new VBox(20);
             Button ok = new Button("OK!");
             ok.setPrefSize(60, 30);
@@ -80,7 +82,7 @@ class Kontrolli extends Main {
                     dialog.close();
                 }
             });
-            dialogVbox.getChildren().add(new Text("Alright! You've done it! " + '\n' + '\n' + " Your time is " + time.getTime()));
+            dialogVbox.getChildren().add(new Text("Alright! You've done it! " + '\n' + '\n' + " Your time is " + Main.time.getTime()));
             dialogVbox.getChildren().addAll(ok);
             dialogVbox.setStyle("-fx-font-size: 12px;"
                     + "-fx-font-style: italic;"
@@ -95,7 +97,7 @@ class Kontrolli extends Main {
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
-            dialog.initOwner(lava);
+            dialog.initOwner(Main.lava);
             VBox dialogVbox = new VBox(20);
             Button ok = new Button("OK!");
             ok.setPrefSize(60, 30);

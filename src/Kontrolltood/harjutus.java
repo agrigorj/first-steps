@@ -1,3 +1,5 @@
+package Kontrolltood;
+
 /**
  * Created by agrigorj on 01/12/15.
  */

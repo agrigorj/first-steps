@@ -1,3 +1,6 @@
+package Projekt;
+
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -136,7 +139,7 @@ class GUI extends Main {
                 time.startCount();//aeg hakkab käima 0-st
             }
         });
-        Label explain = new Label("Please choose difficulty level to start or press  F1 for help");
+        Label explain = new Label("Please choose difficulty level to start or press  F1 for  help");
         explain.setStyle("-fx-font-size: 14px;"
                 + "-fx-font-style: italic;"
                 + "-fx-alignment: center;"

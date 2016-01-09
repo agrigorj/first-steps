@@ -1,3 +1,5 @@
+package Kontrolltood;
+
 import java.util.Arrays;
 
 /**Koostage Java meetod etteantud täisarvumaatriksi m veerusummade massiivi leidmiseks
