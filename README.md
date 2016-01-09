@@ -18,4 +18,4 @@ Eesmärgid:
 
 Kasutusjuhend
 <br>
-Programmi kasutamine on lihtne. Programm kaivitub Main klassist. Avaneb peaaken. Mangureeglite lugemiseks vajuta klahv F1. Mangu alustamiseks vali  raskustase (easy==lihtne; medium==keskmine; hard==raske). Programm genereerib sudoku vastavalt valitule raskustasemele. Aeg laks! Kui oled valmis, vajuta nupule "check out"(==kontrolli). Kui ei saa hakkama, aga tahad veenduda, et lahendus on ikka olemas vajuta nupule "Show solution" (==naita lahendus). Kui tahad alustada uuesti, vajuta nupule "Main screen" (==Peaekraanile).
+Programmi kasutamine on lihtne. Programm kaivitub Main klassist. Avaneb peaaken. Mangureeglite lugemiseks vajuta klahv F1. Mangu alustamiseks vali  raskustase (easy==lihtne; medium==keskmine; hard==raske). Programm genereerib sudoku vastavalt valinutele raskustasemele. Aeg laks! Kui oled valmis, vajuta nupule "check out"(==kontrolli). Kui ei saa hakkama, aga tahad veenduda, et lahendus on ikka olemas, vajuta nupule "Show solution" (==naita lahendus). Kui tahad alustada uuesti, vajuta nupule "Main screen" (==Peaekraanile).
