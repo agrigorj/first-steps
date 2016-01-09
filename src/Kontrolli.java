@@ -14,31 +14,33 @@ import java.util.ArrayList;
 
 /**
  * Created by agrigorj on 25/12/15.
+ * Klass m�ngija poolt t�idetud maatriksi kontrollimiseks.
+ * P�him�te: kirjutame �les kasutaja pooltt lahendatud sudoku ja v�rdleme arvuti lahendusega.
+ * Kui lahendus on �ige, siis proggramm �tleb kasutajale, et on korras; kui on vead, siis programm hoiatab, et lahendus ei ole
+ * �ige ja n�itab punasega valed ruudud.
  */
-public class Kontrolli extends  Main {
-    public void kontrolli() {
-        ArrayList kasutajalt = new ArrayList();
-        ArrayList programmilt =new ArrayList();
-        for (Node node:laud.getChildren()) {
+class Kontrolli extends Main {
+    static void kontrolli() {
+        ArrayList kasutajalt = new ArrayList(); //siia kirjutame �les kasutaja maatriksi
+        ArrayList programmilt = new ArrayList();//siia kopeerime programmi poolt lahendatud maatriksi
+        for (Node node : laud.getChildren()) { //skaneerime k�ik laua lahtrid
             if (node instanceof TextField) {
                 kasutajalt.add(((TextField) node).getText().trim());
-            } else if(node instanceof Label) {
+            } else if (node instanceof Label) {
                 kasutajalt.add(((Label) node).getText().trim());
             }
         }
-        System.out.println(kasutajalt);
-        for (int i = 0; i <9 ; i++) {
-            for (int j = 0; j <9 ; j++) {
-                programmilt.add(Integer.toString(class1.solved[i][j]));
+        System.out.println(kasutajalt); //vihjed konsooli
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                programmilt.add(Integer.toString(newField.solved[i][j]));
             }
         }
-          System.out.println(programmilt);
-        for (int i = 0; i <81 ; i++) {
-            // System.out.println(Integer.toString(i/9));
-            // System.out.println(Integer.toString(i-(i/9*9)));
+        System.out.println(programmilt);//vihjed konsooli
+        for (int i = 0; i < 81; i++) {
             if (programmilt.get(i).equals(kasutajalt.get(i))) {
                 laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
-                        +"-fx-alignment: center;"
+                        + "-fx-alignment: center;"
                         + "-fx-font-weight: bold;"
                         + "-fx-font-family: Arial Black;"
                         + "-fx-text-fill: GREEN;");
@@ -49,38 +51,36 @@ public class Kontrolli extends  Main {
                         + "-fx-font-weight: bold;"
                         + "-fx-font-family: Arial Black;"
                         + "-fx-text-fill: blue;"
-                        +"-fx-background-color: #F5F5DC; "
+                        + "-fx-background-color: #F5F5DC; "
                         + "-fx-border-color:grey;");
 
-            }
-            else { laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
-                    + "-fx-font-style: italic;"
-                    + "-fx-alignment: center;"
-                    + "-fx-font-weight: bold;"
-                    + "-fx-font-family: Arial Black;"
-                    + "-fx-text-fill: red;"
-                    + "-fx-background-color: #F5F5DC; "
-                    + "-fx-border-color:red;");
+            } else {
+                laud.getChildren().get((i + 1) * 2 - 1).setStyle("-fx-font-size: 12px;"
+                        + "-fx-font-style: italic;"
+                        + "-fx-alignment: center;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-font-family: Arial Black;"
+                        + "-fx-text-fill: red;"
+                        + "-fx-background-color: #F5F5DC; "
+                        + "-fx-border-color:red;");
             }
         }
-        if (kasutajalt.equals(programmilt)){
-            class5.stopCount();
+        if (kasutajalt.equals(programmilt)) {
+            time.stopCount();
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
             dialog.initOwner(lava);
             VBox dialogVbox = new VBox(20);
-            Button ok=new Button("OK!");
-            ok.setPrefSize(60,30);
+            Button ok = new Button("OK!");
+            ok.setPrefSize(60, 30);
             ok.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     dialog.close();
-
-
                 }
             });
-            dialogVbox.getChildren().add(new Text("Alright! You've done it! "+'\n'+'\n'+" Your time is " + class5.getTime()));
+            dialogVbox.getChildren().add(new Text("Alright! You've done it! " + '\n' + '\n' + " Your time is " + time.getTime()));
             dialogVbox.getChildren().addAll(ok);
             dialogVbox.setStyle("-fx-font-size: 12px;"
                     + "-fx-font-style: italic;"
@@ -91,15 +91,14 @@ public class Kontrolli extends  Main {
             Scene dialogScene = new Scene(dialogVbox, 420, 150);
             dialog.setScene(dialogScene);
             dialog.show();
-
-        }else{
+        } else {
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
             dialog.initOwner(lava);
             VBox dialogVbox = new VBox(20);
-            Button ok=new Button("OK!");
-            ok.setPrefSize(60,30);
+            Button ok = new Button("OK!");
+            ok.setPrefSize(60, 30);
             ok.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
